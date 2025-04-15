@@ -7,16 +7,22 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Ribbon;
 using System.Windows.Forms;
+using Microsoft.Office.Core;
 
 namespace OutlookEventsPlugin
 {
     public partial class ThisAddIn
     {
+        private PrintTemplateManager _printTemplateManager;
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             var ribbonFactory = Globals.Factory.GetRibbonFactory();
             var customRibbon = new Ribbon();
             ribbonFactory.CreateRibbonManager(new IRibbonExtension[] { customRibbon });
+
+            // Регистрируем менеджер шаблонов печати
+            _printTemplateManager = new PrintTemplateManager(this.Application);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

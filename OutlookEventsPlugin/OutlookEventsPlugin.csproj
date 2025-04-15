@@ -220,6 +220,7 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="CalendarPrintTemplate.cs" />
+    <Compile Include="PrintTemplateManager.cs" />
     <Compile Include="Ribbon.cs">
       <SubType>Component</SubType>
     </Compile>
