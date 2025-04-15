@@ -4,16 +4,24 @@ using System.Linq;
 using System.Text;
 using Microsoft.Office.Interop.Outlook;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Drawing.Printing;
 
 namespace OutlookEventsPlugin
 {
     public class CalendarPrintTemplate
     {
         private readonly Microsoft.Office.Interop.Outlook.Application _outlookApp;
+        private string _printContent;
+        private Font _printFont;
+        private int _currentPage;
+        private int _totalPages;
+        private List<string> _pages;
 
         public CalendarPrintTemplate(Microsoft.Office.Interop.Outlook.Application outlookApp)
         {
             _outlookApp = outlookApp;
+            _printFont = new Font("Arial", 10);
         }
 
         public void PrintSelectedEvents()
@@ -63,18 +71,73 @@ namespace OutlookEventsPlugin
                     printDocument.AppendLine();
                 }
 
+                _printContent = printDocument.ToString();
+                _currentPage = 0;
+
+                // Разбиваем текст на страницы
+                _pages = SplitTextIntoPages(_printContent);
+
+                // Создаем документ для печати
+                var doc = new PrintDocument();
+                doc.PrintPage += Doc_PrintPage;
+                doc.EndPrint += Doc_EndPrint;
+
                 // Открываем диалог печати
                 var printDialog = new PrintDialog();
+                printDialog.Document = doc;
                 if (printDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Здесь можно добавить код для отправки на печать
-                    MessageBox.Show("Документ отправлен на печать", "Печать", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    doc.Print();
                 }
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show($"Ошибка при печати: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private List<string> SplitTextIntoPages(string text)
+        {
+            var pages = new List<string>();
+            var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            var currentPage = new StringBuilder();
+            var graphics = Graphics.FromHwnd(IntPtr.Zero);
+            var pageHeight = 800; // Высота страницы в пикселях
+            var lineHeight = _printFont.GetHeight(graphics);
+
+            foreach (var line in lines)
+            {
+                currentPage.AppendLine(line);
+                if (currentPage.Length * lineHeight > pageHeight)
+                {
+                    pages.Add(currentPage.ToString());
+                    currentPage.Clear();
+                }
+            }
+
+            if (currentPage.Length > 0)
+            {
+                pages.Add(currentPage.ToString());
+            }
+
+            _totalPages = pages.Count;
+            return pages;
+        }
+
+        private void Doc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            if (_currentPage < _pages.Count)
+            {
+                e.Graphics.DrawString(_pages[_currentPage], _printFont, Brushes.Black, 50, 50);
+                _currentPage++;
+                e.HasMorePages = _currentPage < _pages.Count;
+            }
+        }
+
+        private void Doc_EndPrint(object sender, PrintEventArgs e)
+        {
+            _currentPage = 0;
+            _pages.Clear();
         }
     }
 } 
