@@ -1,0 +1,14 @@
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\obj\Debug\OutlookEventsPlugin.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\obj\Debug\OutlookEventsPlugin.Properties.Resources.resources
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\obj\Debug\OutlookEventsPlugin.csproj.GenerateResource.cache
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\obj\Debug\OutlookEventsPlugin.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\bin\Debug\Ribbon.xml
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\bin\Debug\OutlookEventsPlugin.dll
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\bin\Debug\OutlookEventsPlugin.pdb
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\bin\Debug\OutlookEventsPlugin.dll.manifest
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\bin\Debug\OutlookEventsPlugin.vsto
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\bin\Debug\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\obj\Debug\OutlookE.EE1CC9B1.Up2Date
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\obj\Debug\OutlookEventsPlugin.dll
+C:\Users\user\source\repos\OutlookEventsPlugin\OutlookEventsPlugin\obj\Debug\OutlookEventsPlugin.pdb
