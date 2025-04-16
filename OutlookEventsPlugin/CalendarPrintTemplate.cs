@@ -17,6 +17,8 @@ namespace OutlookEventsPlugin
         private int _currentPage;
         private int _totalPages;
         private List<string> _pages;
+        private const int MARGIN = 50;
+        private const int LINES_PER_PAGE = 50;
 
         public CalendarPrintTemplate(Microsoft.Office.Interop.Outlook.Application outlookApp)
         {
@@ -101,17 +103,18 @@ namespace OutlookEventsPlugin
             var pages = new List<string>();
             var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             var currentPage = new StringBuilder();
-            var graphics = Graphics.FromHwnd(IntPtr.Zero);
-            var pageHeight = 800; // Высота страницы в пикселях
-            var lineHeight = _printFont.GetHeight(graphics);
+            var lineCount = 0;
 
             foreach (var line in lines)
             {
                 currentPage.AppendLine(line);
-                if (currentPage.Length * lineHeight > pageHeight)
+                lineCount++;
+
+                if (lineCount >= LINES_PER_PAGE)
                 {
                     pages.Add(currentPage.ToString());
                     currentPage.Clear();
+                    lineCount = 0;
                 }
             }
 
@@ -128,7 +131,15 @@ namespace OutlookEventsPlugin
         {
             if (_currentPage < _pages.Count)
             {
-                e.Graphics.DrawString(_pages[_currentPage], _printFont, Brushes.Black, 50, 50);
+                var y = MARGIN;
+                var lines = _pages[_currentPage].Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                
+                foreach (var line in lines)
+                {
+                    e.Graphics.DrawString(line, _printFont, Brushes.Black, MARGIN, y);
+                    y += (int)_printFont.GetHeight(e.Graphics);
+                }
+
                 _currentPage++;
                 e.HasMorePages = _currentPage < _pages.Count;
             }
