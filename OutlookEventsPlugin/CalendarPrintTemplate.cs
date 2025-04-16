@@ -54,7 +54,7 @@ namespace OutlookEventsPlugin
 
                 foreach (var appointment in events)
                 {
-                    printDocument.AppendLine($"Событие: {appointment.Subject}");
+                    printDocument.AppendLine($"Тема: {appointment.Subject}");
                     printDocument.AppendLine($"Начало: {appointment.Start}");
                     printDocument.AppendLine($"Окончание: {appointment.End}");
                     printDocument.AppendLine($"Место: {appointment.Location}");
@@ -66,7 +66,7 @@ namespace OutlookEventsPlugin
                         printDocument.AppendLine("Участники:");
                         foreach (Recipient recipient in appointment.Recipients)
                         {
-                            printDocument.AppendLine($"- {recipient.Name} ({recipient.Address})");
+                            printDocument.AppendLine($"- {recipient.Name}");
                         }
                     }
                     printDocument.AppendLine("---------------------------------------");
