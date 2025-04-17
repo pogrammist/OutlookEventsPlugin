@@ -48,17 +48,12 @@ namespace OutlookEventsPlugin
                 if (events.Count == 0) return;
 
                 var printDocument = new StringBuilder();
-                printDocument.AppendLine("Детальная информация о событиях календаря");
-                printDocument.AppendLine("=======================================");
-                printDocument.AppendLine();
 
                 foreach (var appointment in events)
                 {
                     printDocument.AppendLine($"Тема: {appointment.Subject}");
-                    printDocument.AppendLine($"Начало: {appointment.Start}");
-                    printDocument.AppendLine($"Окончание: {appointment.End}");
-                    printDocument.AppendLine($"Место: {appointment.Location}");
-                    printDocument.AppendLine($"Описание: {appointment.Body}");
+                    printDocument.AppendLine($"Начало: {appointment.Start.ToString("dd.MM.yyyy HH:mm")}");
+                    printDocument.AppendLine($"Окончание: {appointment.End.ToString("dd.MM.yyyy HH:mm")}");
                     printDocument.AppendLine();
 
                     if (appointment.Recipients.Count > 0)
@@ -69,7 +64,8 @@ namespace OutlookEventsPlugin
                             printDocument.AppendLine($"- {recipient.Name}");
                         }
                     }
-                    printDocument.AppendLine("---------------------------------------");
+                    printDocument.
+                    printDocument.AppendLine(new string('-', 155));
                     printDocument.AppendLine();
                 }
 
