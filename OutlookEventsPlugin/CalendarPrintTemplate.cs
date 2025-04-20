@@ -13,17 +13,21 @@ namespace OutlookEventsPlugin
     {
         private readonly Microsoft.Office.Interop.Outlook.Application _outlookApp;
         private string _printContent;
-        private Font _printFont;
+        private Font _titleFont;
+        private Font _contentFont;
         private int _currentPage;
         private int _totalPages;
         private List<string> _pages;
         private const int MARGIN = 50;
         private const int LINES_PER_PAGE = 50;
+        private const int LINE_HEIGHT = 20;
+        private const int DIVIDER_LINE_HEIGHT = 2;
 
         public CalendarPrintTemplate(Microsoft.Office.Interop.Outlook.Application outlookApp)
         {
             _outlookApp = outlookApp;
-            _printFont = new Font("Arial", 10);
+            _titleFont = new Font("Arial", 10, FontStyle.Bold);
+            _contentFont = new Font("Arial", 10);
         }
 
         public void PrintSelectedEvents()
@@ -52,21 +56,15 @@ namespace OutlookEventsPlugin
                 foreach (var appointment in events)
                 {
                     printDocument.AppendLine($"Тема: {appointment.Subject}");
-                    printDocument.AppendLine($"Начало: {appointment.Start.ToString("dd.MM.yyyy HH:mm")}");
-                    printDocument.AppendLine($"Окончание: {appointment.End.ToString("dd.MM.yyyy HH:mm")}");
-                    printDocument.AppendLine();
+                    printDocument.AppendLine($"Начало:\t{appointment.Start.ToString("dd.MM.yyyy HH:mm")}");
+                    printDocument.AppendLine($"Конец:\t{appointment.End.ToString("dd.MM.yyyy HH:mm")}");
 
                     if (appointment.Recipients.Count > 0)
                     {
-                        printDocument.AppendLine("Участники:");
-                        foreach (Recipient recipient in appointment.Recipients)
-                        {
-                            printDocument.AppendLine($"- {recipient.Name}");
-                        }
+                        var recipients = string.Join("; ", appointment.Recipients.Cast<Recipient>().Select(r => r.Name));
+                        printDocument.AppendLine($"Участники: {recipients}");
                     }
-                    printDocument.
-                    printDocument.AppendLine(new string('-', 155));
-                    printDocument.AppendLine();
+                    printDocument.AppendLine("DIVIDER");
                 }
 
                 _printContent = printDocument.ToString();
@@ -129,11 +127,52 @@ namespace OutlookEventsPlugin
             {
                 var y = MARGIN;
                 var lines = _pages[_currentPage].Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                var stringFormat = new StringFormat();
+                stringFormat.Trimming = StringTrimming.Word;
+                
+                // Определяем ширину колонок в процентах
+                const float LABEL_COLUMN_PERCENT = 0.2f; // 20% ширины страницы
+                const float VALUE_COLUMN_PERCENT = 0.8f; // 80% ширины страницы
+                
+                // Вычисляем ширину колонок
+                var availableWidth = e.PageBounds.Width - 2 * MARGIN;
+                var labelColumnWidth = availableWidth * LABEL_COLUMN_PERCENT;
+                var valueColumnWidth = availableWidth * VALUE_COLUMN_PERCENT;
                 
                 foreach (var line in lines)
                 {
-                    e.Graphics.DrawString(line, _printFont, Brushes.Black, MARGIN, y);
-                    y += (int)_printFont.GetHeight(e.Graphics);
+                    if (line == "DIVIDER")
+                    {
+                        e.Graphics.DrawLine(new Pen(Color.Black, DIVIDER_LINE_HEIGHT), 
+                            MARGIN, y, e.PageBounds.Width - MARGIN, y);
+                        y += LINE_HEIGHT;
+                    }
+                    else if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        var parts = line.Split(new[] { ':' }, 2);
+                        if (parts.Length == 2)
+                        {
+                            // Отрисовка метки
+                            var labelRect = new RectangleF(MARGIN, y, labelColumnWidth, e.PageBounds.Height - y);
+                            e.Graphics.DrawString(parts[0] + ":", _titleFont, Brushes.Black, labelRect, stringFormat);
+                            
+                            // Отрисовка значения
+                            var valueRect = new RectangleF(MARGIN + labelColumnWidth, y, valueColumnWidth, e.PageBounds.Height - y);
+                            e.Graphics.DrawString(parts[1].Trim(), _contentFont, Brushes.Black, valueRect, stringFormat);
+                            
+                            // Вычисляем высоту для следующей строки
+                            var labelHeight = e.Graphics.MeasureString(parts[0] + ":", _titleFont, (int)labelColumnWidth, stringFormat).Height;
+                            var valueHeight = e.Graphics.MeasureString(parts[1].Trim(), _contentFont, (int)valueColumnWidth, stringFormat).Height;
+                            y += (int)Math.Max(labelHeight, valueHeight);
+                        }
+                        else
+                        {
+                            // Для строк без разделителя (например, "Участники:")
+                            var layoutRect = new RectangleF(MARGIN, y, e.PageBounds.Width - 2 * MARGIN, e.PageBounds.Height - y);
+                            e.Graphics.DrawString(line, _titleFont, Brushes.Black, layoutRect, stringFormat);
+                            y += (int)e.Graphics.MeasureString(line, _titleFont, (int)(e.PageBounds.Width - 2 * MARGIN), stringFormat).Height;
+                        }
+                    }
                 }
 
                 _currentPage++;

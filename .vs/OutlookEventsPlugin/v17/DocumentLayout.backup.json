@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\OutlookEventsPlugin\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|c:\\users\\user\\source\\repos\\outlookeventsplugin\\outlookeventsplugin\\thisaddin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|c:\\users\\user\\source\\repos\\outlookeventsplugin\\outlookeventsplugin\\calendarprinttemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|solutionrelative:outlookeventsplugin\\calendarprinttemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|C:\\Users\\user\\source\\repos\\OutlookEventsPlugin\\outlookeventsplugin\\thisaddin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|solutionrelative:outlookeventsplugin\\thisaddin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|C:\\Users\\user\\source\\repos\\OutlookEventsPlugin\\outlookeventsplugin\\ribbon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|solutionrelative:outlookeventsplugin\\ribbon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|C:\\Users\\user\\source\\repos\\OutlookEventsPlugin\\outlookeventsplugin\\calendarprinttemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|solutionrelative:outlookeventsplugin\\calendarprinttemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +22,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Ribbon.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\Ribbon.cs",
               "RelativeDocumentMoniker": "OutlookEventsPlugin\\Ribbon.cs",
@@ -38,28 +38,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "CalendarPrintTemplate.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\CalendarPrintTemplate.cs",
               "RelativeDocumentMoniker": "OutlookEventsPlugin\\CalendarPrintTemplate.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\CalendarPrintTemplate.cs",
               "RelativeToolTip": "OutlookEventsPlugin\\CalendarPrintTemplate.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAQwEkAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAmwFsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T14:36:55.265Z"
+              "WhenOpened": "2025-04-15T14:36:55.265Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ThisAddIn.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\ThisAddIn.cs",
               "RelativeDocumentMoniker": "OutlookEventsPlugin\\ThisAddIn.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\ThisAddIn.cs",
               "RelativeToolTip": "OutlookEventsPlugin\\ThisAddIn.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T13:55:52.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-15T13:55:52.321Z"
             }
           ]
         }
