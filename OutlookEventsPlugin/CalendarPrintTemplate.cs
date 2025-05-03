@@ -15,6 +15,7 @@ namespace OutlookEventsPlugin
         private string _printContent;
         private Font _titleFont;
         private Font _contentFont;
+        private Font _durationFont;
         private int _currentPage;
         private int _totalPages;
         private List<string> _pages;
@@ -28,6 +29,7 @@ namespace OutlookEventsPlugin
             _outlookApp = outlookApp;
             _titleFont = new Font("Arial", 10, FontStyle.Bold);
             _contentFont = new Font("Arial", 10);
+            _durationFont = new Font("Arial", 10, FontStyle.Bold);
         }
 
         public void PrintSelectedEvents()
@@ -56,8 +58,16 @@ namespace OutlookEventsPlugin
                 foreach (var appointment in events)
                 {
                     printDocument.AppendLine($"Тема: {appointment.Subject}");
-                    printDocument.AppendLine($"Начало:\t{appointment.Start.ToString("dd.MM.yyyy HH:mm")}");
-                    printDocument.AppendLine($"Конец:\t{appointment.End.ToString("dd.MM.yyyy HH:mm")}");
+                    var duration = appointment.End - appointment.Start;
+                    var days = duration.Days;
+                    var hours = duration.Hours;
+                    var minutes = duration.Minutes;
+                    var durationParts = new List<string>();
+                    if (days > 0) durationParts.Add($"{days}д");
+                    if (hours > 0) durationParts.Add($"{hours}ч");
+                    if (minutes > 0) durationParts.Add($"{minutes}м");
+                    var durationText = string.Join(" ", durationParts);
+                    printDocument.AppendLine($"Время: {appointment.Start.ToString("dd.MM.yyyy")}, {appointment.Start.ToString("HH:mm")} - {appointment.End.ToString("HH:mm")} ({durationText})");
 
                     if (appointment.Recipients.Count > 0)
                     {
@@ -158,7 +168,26 @@ namespace OutlookEventsPlugin
                             
                             // Отрисовка значения
                             var valueRect = new RectangleF(MARGIN + labelColumnWidth, y, valueColumnWidth, e.PageBounds.Height - y);
-                            e.Graphics.DrawString(parts[1].Trim(), _contentFont, Brushes.Black, valueRect, stringFormat);
+                            var valueText = parts[1].Trim();
+                            if (valueText.Contains("(") && valueText.Contains(")"))
+                            {
+                                var startIndex = valueText.IndexOf("(");
+                                var endIndex = valueText.IndexOf(")");
+                                var beforeDuration = valueText.Substring(0, startIndex);
+                                var duration = valueText.Substring(startIndex);
+                                
+                                // Отрисовка текста до длительности
+                                e.Graphics.DrawString(beforeDuration, _contentFont, Brushes.Black, valueRect, stringFormat);
+                                
+                                // Отрисовка длительности жирным шрифтом
+                                var durationWidth = e.Graphics.MeasureString(beforeDuration, _contentFont, (int)valueColumnWidth, stringFormat).Width;
+                                var durationRect = new RectangleF(MARGIN + labelColumnWidth + durationWidth, y, valueColumnWidth - durationWidth, e.PageBounds.Height - y);
+                                e.Graphics.DrawString(duration, _durationFont, Brushes.Black, durationRect, stringFormat);
+                            }
+                            else
+                            {
+                                e.Graphics.DrawString(valueText, _contentFont, Brushes.Black, valueRect, stringFormat);
+                            }
                             
                             // Вычисляем высоту для следующей строки
                             var labelHeight = e.Graphics.MeasureString(parts[0] + ":", _titleFont, (int)labelColumnWidth, stringFormat).Height;
