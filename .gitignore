@@ -1,0 +1,33 @@
+# Файлы сборки
+bin/
+obj/
+Debug/
+Release/
+publish/
+
+# Файлы Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.pdb
+*.dll
+*.exe
+
+# Временные файлы
+[Tt]emp/
+*.tmp
+*.log
+
+# Пакеты NuGet
+packages/
+*.nupkg
+
+# Файлы Office
+~$*
+*.vsto
+
+# Другие файлы
+*.bak
+*.zip
+*.rar
