@@ -168,21 +168,31 @@ namespace OutlookEventsPlugin
                             
                             // Отрисовка значения
                             var valueRect = new RectangleF(MARGIN + labelColumnWidth, y, valueColumnWidth, e.PageBounds.Height - y);
-                            var valueText = parts[1].Trim();
-                            if (valueText.Contains("(") && valueText.Contains(")"))
+                            var valueText = parts[1]?.Trim() ?? string.Empty;
+                            
+                            // Проверяем, содержит ли текст длительность в скобках
+                            if (valueText.Contains("(") && valueText.Contains(")") && valueText.Contains("ч") || valueText.Contains("д") || valueText.Contains("м"))
                             {
-                                var startIndex = valueText.IndexOf("(");
-                                var endIndex = valueText.IndexOf(")");
-                                var beforeDuration = valueText.Substring(0, startIndex);
-                                var duration = valueText.Substring(startIndex);
+                                var startIndex = valueText.LastIndexOf("(");
+                                var endIndex = valueText.LastIndexOf(")");
                                 
-                                // Отрисовка текста до длительности
-                                e.Graphics.DrawString(beforeDuration, _contentFont, Brushes.Black, valueRect, stringFormat);
-                                
-                                // Отрисовка длительности жирным шрифтом
-                                var durationWidth = e.Graphics.MeasureString(beforeDuration, _contentFont, (int)valueColumnWidth, stringFormat).Width;
-                                var durationRect = new RectangleF(MARGIN + labelColumnWidth + durationWidth, y, valueColumnWidth - durationWidth, e.PageBounds.Height - y);
-                                e.Graphics.DrawString(duration, _durationFont, Brushes.Black, durationRect, stringFormat);
+                                if (startIndex >= 0 && endIndex > startIndex)
+                                {
+                                    var beforeDuration = valueText.Substring(0, startIndex);
+                                    var duration = valueText.Substring(startIndex, endIndex - startIndex + 1);
+                                    
+                                    // Отрисовка текста до длительности
+                                    e.Graphics.DrawString(beforeDuration, _contentFont, Brushes.Black, valueRect, stringFormat);
+                                    
+                                    // Отрисовка длительности жирным шрифтом
+                                    var durationWidth = e.Graphics.MeasureString(beforeDuration, _contentFont, (int)valueColumnWidth, stringFormat).Width;
+                                    var durationRect = new RectangleF(MARGIN + labelColumnWidth + durationWidth, y, valueColumnWidth - durationWidth, e.PageBounds.Height - y);
+                                    e.Graphics.DrawString(duration, _durationFont, Brushes.Black, durationRect, stringFormat);
+                                }
+                                else
+                                {
+                                    e.Graphics.DrawString(valueText, _contentFont, Brushes.Black, valueRect, stringFormat);
+                                }
                             }
                             else
                             {
