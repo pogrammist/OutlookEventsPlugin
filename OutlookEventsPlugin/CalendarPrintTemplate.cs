@@ -32,7 +32,7 @@ namespace OutlookEventsPlugin
             _durationFont = new Font("Arial", 10, FontStyle.Bold);
         }
 
-        public void PrintSelectedEvents()
+        public void PrintSelectedAppointments()
         {
             try
             {
@@ -42,42 +42,18 @@ namespace OutlookEventsPlugin
                 var selection = explorer.Selection;
                 if (selection == null || selection.Count == 0) return;
 
-                var events = new List<AppointmentItem>();
+                var appointments = new List<AppointmentItem>();
                 foreach (var item in selection)
                 {
                     if (item is AppointmentItem appointment)
                     {
-                        events.Add(appointment);
+                        appointments.Add(appointment);
                     }
                 }
 
-                if (events.Count == 0) return;
+                if (appointments.Count == 0) return;
 
-                var printDocument = new StringBuilder();
-
-                foreach (var appointment in events)
-                {
-                    printDocument.AppendLine($"Тема: {appointment.Subject}");
-                    var duration = appointment.End - appointment.Start;
-                    var days = duration.Days;
-                    var hours = duration.Hours;
-                    var minutes = duration.Minutes;
-                    var durationParts = new List<string>();
-                    if (days > 0) durationParts.Add($"{days}д");
-                    if (hours > 0) durationParts.Add($"{hours}ч");
-                    if (minutes > 0) durationParts.Add($"{minutes}м");
-                    var durationText = string.Join(" ", durationParts);
-                    printDocument.AppendLine($"Время: {appointment.Start.ToString("dd.MM.yyyy")}, {appointment.Start.ToString("HH:mm")} - {appointment.End.ToString("HH:mm")} ({durationText})");
-
-                    if (appointment.Recipients.Count > 0)
-                    {
-                        var recipients = string.Join("; ", appointment.Recipients.Cast<Recipient>().Select(r => r.Name));
-                        printDocument.AppendLine($"Участники: {recipients}");
-                    }
-                    printDocument.AppendLine("DIVIDER");
-                }
-
-                _printContent = printDocument.ToString();
+                _printContent = ParseAppointments(appointments);
                 _currentPage = 0;
 
                 // Разбиваем текст на страницы
@@ -100,6 +76,37 @@ namespace OutlookEventsPlugin
             {
                 MessageBox.Show($"Ошибка при печати: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private string ParseAppointments(List<AppointmentItem> appointments)
+        {
+            var printDocument = new StringBuilder();
+            foreach (var appointment in appointments)
+            {
+                var details = new StringBuilder();
+                details.AppendLine($"Тема: {appointment.Subject}");
+                
+                var duration = appointment.End - appointment.Start;
+                var days = duration.Days;
+                var hours = duration.Hours;
+                var minutes = duration.Minutes;
+                var durationParts = new List<string>();
+                if (days > 0) durationParts.Add($"{days}д");
+                if (hours > 0) durationParts.Add($"{hours}ч");
+                if (minutes > 0) durationParts.Add($"{minutes}м");
+                var durationText = string.Join(" ", durationParts);
+                details.AppendLine($"Время: {appointment.Start.ToString("dd.MM.yyyy")}, {appointment.Start.ToString("HH:mm")} - {appointment.End.ToString("HH:mm")} ({durationText})");
+
+                if (appointment.Recipients.Count > 0)
+                {
+                    var recipients = string.Join("; ", appointment.Recipients.Cast<Recipient>().Select(r => r.Name));
+                    details.AppendLine($"Участники: {recipients}");
+                }
+                details.AppendLine("DIVIDER");
+                
+                printDocument.Append(details.ToString());
+            }
+            return printDocument.ToString();
         }
 
         private List<string> SplitTextIntoPages(string text)

@@ -23,7 +23,7 @@ namespace OutlookEventsPlugin
         private void btnPrintEvents_Click(object sender, RibbonControlEventArgs e)
         {
             var printTemplate = new CalendarPrintTemplate(Globals.ThisAddIn.Application);
-            printTemplate.PrintSelectedEvents();
+            printTemplate.PrintSelectedAppointments();
         }
     }
 } 

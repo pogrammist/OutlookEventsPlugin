@@ -36,7 +36,7 @@ namespace OutlookEventsPlugin
             try
             {
                 var printTemplate = new CalendarPrintTemplate(_outlookApp);
-                printTemplate.PrintSelectedEvents();
+                printTemplate.PrintSelectedAppointments();
             }
             catch (System.Exception ex)
             {
