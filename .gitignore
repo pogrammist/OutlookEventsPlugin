@@ -31,3 +31,8 @@ packages/
 *.bak
 *.zip
 *.rar
+
+# VSCode
+.vscode/
+*.code-workspace
+.history/
