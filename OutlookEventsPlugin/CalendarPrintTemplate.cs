@@ -64,13 +64,8 @@ namespace OutlookEventsPlugin
                 doc.PrintPage += Doc_PrintPage;
                 doc.EndPrint += Doc_EndPrint;
 
-                // Открываем диалог печати
-                var printDialog = new PrintDialog();
-                printDialog.Document = doc;
-                if (printDialog.ShowDialog() == DialogResult.OK)
-                {
-                    doc.Print();
-                }
+                // Показываем предпросмотр
+                ShowPrintPreview(doc);
             }
             catch (System.Exception ex)
             {
@@ -230,6 +225,14 @@ namespace OutlookEventsPlugin
         {
             _currentPage = 0;
             _pages.Clear();
+        }
+
+        private void ShowPrintPreview(PrintDocument printDocument)
+        {
+            using (var previewForm = new CalendarPrintPreviewForm(printDocument))
+            {
+                previewForm.ShowDialog();
+            }
         }
     }
 } 
