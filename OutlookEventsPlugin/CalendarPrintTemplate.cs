@@ -53,19 +53,7 @@ namespace OutlookEventsPlugin
 
                 if (appointments.Count == 0) return;
 
-                _printContent = ParseAppointments(appointments);
-                _currentPage = 0;
-
-                // Разбиваем текст на страницы
-                _pages = SplitTextIntoPages(_printContent);
-
-                // Создаем документ для печати
-                var doc = new PrintDocument();
-                doc.PrintPage += Doc_PrintPage;
-                doc.EndPrint += Doc_EndPrint;
-
-                // Показываем предпросмотр
-                ShowPrintPreview(doc);
+                ShowPrintPreview(appointments);
             }
             catch (System.Exception ex)
             {
@@ -224,15 +212,34 @@ namespace OutlookEventsPlugin
         private void Doc_EndPrint(object sender, PrintEventArgs e)
         {
             _currentPage = 0;
-            _pages.Clear();
+            // _pages.Clear();
         }
 
-        private void ShowPrintPreview(PrintDocument printDocument)
+        // private void Doc_BeginPrint(object sender, PrintEventArgs e)
+        // {
+        //     _currentPage = 0;
+        // }
+
+        private void ShowPrintPreview(List<AppointmentItem> appointments)
         {
-            using (var previewForm = new CalendarPrintPreviewForm(printDocument))
+            _printContent = ParseAppointments(appointments);
+            _currentPage = 0;
+
+            // Разбиваем текст на страницы
+            _pages = SplitTextIntoPages(_printContent);
+
+            // Создаем документ для печати
+            var doc = new PrintDocument();
+            // doc.BeginPrint += Doc_BeginPrint;
+            doc.PrintPage += Doc_PrintPage;
+            doc.EndPrint += Doc_EndPrint;
+
+            //var previewForm = new CalendarPrintPreviewForm(doc);
+            var previewForm = new PrintPreviewDialog
             {
-                previewForm.ShowDialog();
-            }
+                Document = doc
+            };
+            previewForm.ShowDialog();
         }
     }
 } 

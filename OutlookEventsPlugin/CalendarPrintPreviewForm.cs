@@ -18,7 +18,7 @@ namespace OutlookEventsPlugin
 
         private void InitializeComponents()
         {
-            this.Text = "������������ ������";
+            this.Text = "Предпросмотр печати";
             this.Size = new Size(1200, Screen.PrimaryScreen.WorkingArea.Height);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Icon = SystemIcons.Information;
@@ -39,13 +39,13 @@ namespace OutlookEventsPlugin
 
             var printButton = new Button
             {
-                Text = "������",
+                Text = "Печать",
                 Location = new Point(10, 10),
                 Size = new Size(100, 25)
             };
             printButton.Click += (s, e) =>
             {
-                var printDialog = new PrintDialog
+                var printDialog = new PrintPreviewDialog
                 {
                     Document = _printDocument
                 };
@@ -59,7 +59,7 @@ namespace OutlookEventsPlugin
 
             var closeButton = new Button
             {
-                Text = "�������",
+                Text = "Закрыть",
                 Location = new Point(120, 10),
                 Size = new Size(100, 25)
             };
