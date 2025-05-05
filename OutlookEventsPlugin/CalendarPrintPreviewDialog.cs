@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace OutlookEventsPlugin
 {
-    public class CalendarPrintPreviewForm : Form
+    public class CalendarPrintPreviewDialog : Form
     {
         private PrintDocument _printDocument;
         private PrintPreviewControl _previewControl;
 
-        public CalendarPrintPreviewForm(PrintDocument printDocument)
+        public CalendarPrintPreviewDialog(PrintDocument printDocument)
         {
             _printDocument = printDocument;
             InitializeComponents();
@@ -45,7 +45,7 @@ namespace OutlookEventsPlugin
             };
             printButton.Click += (s, e) =>
             {
-                var printDialog = new PrintPreviewDialog
+                var printDialog = new PrintDialog
                 {
                     Document = _printDocument
                 };
@@ -72,4 +72,4 @@ namespace OutlookEventsPlugin
             this.Controls.Add(buttonPanel);
         }
     }
-}
+} 

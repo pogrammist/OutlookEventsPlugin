@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\01srf\\source\\repos\\OutlookEventsPlugin\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|c:\\users\\01srf\\source\\repos\\outlookeventsplugin\\outlookeventsplugin\\calendarprinttemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|C:\\Users\\01srf\\source\\repos\\OutlookEventsPlugin\\outlookeventsplugin\\calendarprinttemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|solutionrelative:outlookeventsplugin\\calendarprinttemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|C:\\Users\\01srf\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\CalendarPrintPreviewForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|solutionrelative:OutlookEventsPlugin\\CalendarPrintPreviewForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|c:\\users\\01srf\\source\\repos\\outlookeventsplugin\\outlookeventsplugin\\calendarprintpreviewdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|solutionrelative:outlookeventsplugin\\calendarprintpreviewdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{35DFEA38-7915-49CD-8EF5-3389C0B322C4}|OutlookEventsPlugin\\OutlookEventsPlugin.csproj|C:\\Users\\01srf\\source\\repos\\OutlookEventsPlugin\\outlookeventsplugin\\ribbon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,14 +27,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CalendarPrintPreviewForm.cs",
-              "DocumentMoniker": "C:\\Users\\01srf\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\CalendarPrintPreviewForm.cs",
-              "RelativeDocumentMoniker": "OutlookEventsPlugin\\CalendarPrintPreviewForm.cs",
-              "ToolTip": "C:\\Users\\01srf\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\CalendarPrintPreviewForm.cs",
-              "RelativeToolTip": "OutlookEventsPlugin\\CalendarPrintPreviewForm.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowAcAAAAZAAAAAAAAAA==",
+              "Title": "CalendarPrintPreviewDialog.cs",
+              "DocumentMoniker": "C:\\Users\\01srf\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\CalendarPrintPreviewDialog.cs",
+              "RelativeDocumentMoniker": "OutlookEventsPlugin\\CalendarPrintPreviewDialog.cs",
+              "ToolTip": "C:\\Users\\01srf\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\CalendarPrintPreviewDialog.cs",
+              "RelativeToolTip": "OutlookEventsPlugin\\CalendarPrintPreviewDialog.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAowAcAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T04:18:51.796Z",
+              "WhenOpened": "2025-05-05T10:18:31.553Z",
               "EditorCaption": ""
             },
             {
@@ -45,7 +45,7 @@
               "RelativeDocumentMoniker": "OutlookEventsPlugin\\CalendarPrintTemplate.cs",
               "ToolTip": "C:\\Users\\01srf\\source\\repos\\OutlookEventsPlugin\\OutlookEventsPlugin\\CalendarPrintTemplate.cs",
               "RelativeToolTip": "OutlookEventsPlugin\\CalendarPrintTemplate.cs",
-              "ViewState": "AgIAAN0AAAAAAAAAAAAwwPEAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAANIAAAAAAAAAAAAowOUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-15T14:36:55.265Z",
               "EditorCaption": ""

@@ -234,11 +234,11 @@ namespace OutlookEventsPlugin
             doc.PrintPage += Doc_PrintPage;
             doc.EndPrint += Doc_EndPrint;
 
-            //var previewForm = new CalendarPrintPreviewForm(doc);
-            var previewForm = new PrintPreviewDialog
-            {
-                Document = doc
-            };
+            var previewForm = new CalendarPrintPreviewDialog(doc);
+            // var previewForm = new PrintPreviewDialog
+            // {
+            //     Document = doc
+            // };
             previewForm.ShowDialog();
         }
     }

@@ -202,7 +202,7 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="CalendarPrintPreviewForm.cs">
+    <Compile Include="CalendarPrintPreviewDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
