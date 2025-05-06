@@ -205,6 +205,7 @@
     <Compile Include="CalendarPrintPreviewDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PrintContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
