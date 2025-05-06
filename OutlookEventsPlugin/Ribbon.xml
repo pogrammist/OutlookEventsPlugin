@@ -9,6 +9,11 @@
                   size="large"
                   onAction="btnPrintEvents_Click"
                   imageMso="PrintPreview" />
+          <button id="btnPrintDay"
+                  label="Печать событий за день"
+                  size="large"
+                  onAction="btnPrintDay_Click"
+                  imageMso="CalendarDay" />
         </group>
       </tab>
     </tabs>

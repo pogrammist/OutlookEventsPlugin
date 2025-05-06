@@ -25,5 +25,11 @@ namespace OutlookEventsPlugin
             var printTemplate = new CalendarPrintTemplate(Globals.ThisAddIn.Application);
             printTemplate.PrintSelectedAppointments();
         }
+
+        private void btnPrintDay_Click(object sender, RibbonControlEventArgs e)
+        {
+            var printTemplate = new CalendarPrintTemplate(Globals.ThisAddIn.Application);
+            printTemplate.PrintAppointmentsForSelectedDay();
+        }
     }
 } 

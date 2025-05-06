@@ -49,6 +49,53 @@ namespace OutlookEventsPlugin
             }
         }
 
+        public void PrintAppointmentsForSelectedDay()
+        {
+            try
+            {
+                var explorer = _outlookApp.ActiveExplorer();
+                if (explorer == null) return;
+
+                var folder = explorer.CurrentFolder as Microsoft.Office.Interop.Outlook.Folder;
+                if (folder == null) return;
+
+                var calendar = folder.Items;
+                calendar.IncludeRecurrences = true;
+
+                // Получаем выбранную дату (или сегодня, если не удалось)
+                DateTime selectedDate = DateTime.Today;
+                if (explorer.CurrentView is Microsoft.Office.Interop.Outlook.CalendarView calendarView)
+                {
+                    selectedDate = calendarView.SelectedStartTime.Date;
+                }
+
+                // Фильтруем события только за этот день
+                string filter = $"[Start] >= '{selectedDate:MM/dd/yyyy 00:00}' AND [Start] < '{selectedDate.AddDays(1):MM/dd/yyyy 00:00}'";
+                var items = calendar.Restrict(filter);
+
+                var appointments = new List<AppointmentItem>();
+                foreach (object item in items)
+                {
+                    if (item is AppointmentItem appointment)
+                    {
+                        appointments.Add(appointment);
+                    }
+                }
+
+                if (appointments.Count == 0)
+                {
+                    MessageBox.Show("Нет событий за выбранный день.", "Печать событий", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                ShowPrintPreview(appointments);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show($"Ошибка при печати: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void ShowPrintPreview(List<AppointmentItem> appointments)
         {
             _printContext.Content = ParseAppointments(appointments);

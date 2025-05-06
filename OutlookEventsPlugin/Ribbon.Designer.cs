@@ -17,6 +17,7 @@ namespace OutlookEventsPlugin
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.btnPrintEvents = this.Factory.CreateRibbonButton();
+            this.btnPrintDay = this.Factory.CreateRibbonButton();
 
             // tab1
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
@@ -26,12 +27,18 @@ namespace OutlookEventsPlugin
 
             // group1
             this.group1.Items.Add(this.btnPrintEvents);
+            this.group1.Items.Add(this.btnPrintDay);
             this.group1.Label = "Печать событий";
 
             // btnPrintEvents
             this.btnPrintEvents.Label = "Печать выбранных событий";
             this.btnPrintEvents.Name = "btnPrintEvents";
             this.btnPrintEvents.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnPrintEvents_Click);
+
+            // btnPrintDay
+            this.btnPrintDay.Label = "Печать событий за день";
+            this.btnPrintDay.Name = "btnPrintDay";
+            this.btnPrintDay.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnPrintDay_Click);
 
             // Ribbon
             this.Name = "Ribbon";
@@ -43,5 +50,6 @@ namespace OutlookEventsPlugin
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnPrintEvents;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnPrintDay;
     }
 } 
